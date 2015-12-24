@@ -1,6 +1,12 @@
+''' Display the doc of all the defined classes
+for i in [("\n".join(c)) for c in [[i for i in p.__doc__.split("\n")] for p in defined_class]]: print(i.encode('utf-8').decode('unicode-escape'))
+'''
+
+defined_class = [Matrix, Complex, Ratio] # Completed/functional classes
 """ MATRIX CLASS"""
 class Matrix():
     '''
+    Class name : Matrix
     Class type : Math class
     Matrix implementation with methods :
         * initialisation
@@ -85,8 +91,9 @@ class Matrix():
 """ COMPLEX CLASS """
 class Complex():
     '''
+    Class name : Complex
     Class type : Math class
-    Rational implementation with methods :
+    Complex implementation with methods :
         * initialisation
         * representation
         * real part
@@ -131,6 +138,7 @@ class Complex():
 """ RATIONAL CLASS"""
 class Ratio():
     '''
+    Class name : Rational
     Class type : Math class
     Rational implementation with methods :
         * initialisation
