@@ -1,22 +1,5 @@
-class Complex:
-    '''
-    Class type : Math class
-    Complex implementation with methods :
-        * initialisation
-        * representation
-    '''
-    def __init__(self, real, imag):
-        self.r = real
-        self.i = imag
-
-    def __repr__(self):
-        if i==0:
-            ret = str(self.r)
-        else:
-            ret = str(self.i)+"i" if r==0 else str(self.r)+"+"+str(self.i)+"i"
-        return ret
-
-class Matrix:
+""" MATRIX CLASS"""
+class Matrix():
     '''
     Class type : Math class
     Matrix implementation with methods :
@@ -97,5 +80,102 @@ class Matrix:
 
     def scal(self, scal):
         return Matrix([[scal*self.comp[i][j] for j in range(self.l)] for i in range(self.h)])
-
 ## Actually there are too many assertions here ! (do not see that py in Pyzo, it's ugly)
+
+""" COMPLEX CLASS """
+class Complex():
+    '''
+    Class type : Math class
+    Rational implementation with methods :
+        * initialisation
+        * representation
+        * real part
+        * imaginary part
+        * negation
+        * equality
+        * addition
+        * multiplication
+        * division
+    '''
+    def __init__(self, real, imag):
+        self.r = real
+        self.i = imag
+
+    def __repr__(self):
+        if self.r == 0:
+            return str(self.i) + 'i'
+        else:
+            if self.i==0:
+                return str(self.r)
+            else:
+                return str(self.r) + '+' + str(self.i) + 'i'
+
+    def real(self):return self.r
+    def imag(self):return self.i
+
+    def __neg__(self):
+        return Complex(self.r, -self.i)
+
+    def __eq__(self,other):
+        return self.r == other.r and self.i == other.i
+
+    def __add__(self, other):
+        return Complex(self.r+other.r, self.i+other.i)
+
+    def __mul__(self, other):
+        return Complex(self.r*other.r - self.i*other.i, self.r*other.i + other.r*self.i)
+
+    def __truediv__(self, other):
+        return Complex((-other*self).real()/(-other*other).real(),(-other*self).imag()/(-other*other).real())
+
+""" RATIONAL CLASS"""
+class Ratio():
+    '''
+    Class type : Math class
+    Rational implementation with methods :
+        * initialisation
+        * representation
+        * equality (__eq__)
+        * hash (for set purposes)
+        * invert
+        * negation
+        * addition
+        * multiplication
+        * substraction
+        * division
+    '''
+    from fractions import gcd
+
+    def __init__(self, num, den):
+        assert den != 0, 'Rationnel indéfini : den = 0'
+        self.den = den
+        self.num = num
+
+    def __repr__(self):
+        gc = gcd(self.num, self.den)
+        return str(self.num//gc) +'/' + str(self.den//gc)
+
+    def __hash__(self):
+        return hash(self.num)^hash(self.den)
+
+    def inv(self):
+        return Ratio(self.den, self.num)
+
+    #Classic ops
+    def __eq__(self, other):
+        return self.num * other.den == other.num * self.den
+
+    def __neg__(self):
+        return Ratio(-self.num, self.den)
+
+    def __add__(self, other):
+        return Ratio(self.num*other.den + other.num*self.den, other.den*self.den)
+
+    def __mul__(self, other):
+        return Ratio(self.num*other.num, self.den*other.den)
+
+    def __sub__(self, other):
+        return self + -other
+
+    def __truediv__(self, other):
+        return self * other.inv()
