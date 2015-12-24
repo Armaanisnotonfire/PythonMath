@@ -9,6 +9,12 @@ class Complex:
         self.r = real
         self.i = imag
 
+    def __repr__(self):
+        if i==0:
+            ret = str(self.r)
+        else:
+            ret = str(self.i)+"i" if r==0 else str(self.r)+"+"+str(self.i)+"i"
+        return ret
 
 class Matrix:
     '''
