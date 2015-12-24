@@ -12,7 +12,7 @@ Matrix implementation with methods :
  * setitem (via `matrix[(i,j)]=value`)
  * len (return a tuple `(i,j)`)
 
----
+
 # Complex
 Class type : Math class  
 Complex implementation with methods :
@@ -26,7 +26,7 @@ Complex implementation with methods :
   * multiplication
   * division
 
----
+
 # Rational
 Class type : Math class  
 Rational implementation with methods :
