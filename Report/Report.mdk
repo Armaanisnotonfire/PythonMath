@@ -1,0 +1,68 @@
+Title         : Mathematics class
+Sub Title     : Written in python
+Author        : Enzo Mallard
+Affiliation   : IUT-Nantes INFO 1 G4-2
+Email         : enzo.mallard@etu.univ-nantes.fr
+
+Reveal Theme  : solarized
+Beamer Theme  : singapore
+Package       : pstricks
+Package       : pst-plot
+Colorizer     : python
+Logo          : True
+
+Doc class     : [10pt]article
+
+[TITLE]
+
+~ Abstract
+The aim of this library is to implement several mathematics aspects.
+Currently, there are only the [Matrix](#sec-matrix) class, the [Complex](#sec-complex) class and the [Ratio](#sec-ratio).
+~
+
+
+# Matrix            { #sec-matrix}
+This class contain 9 methods (and the \_\_init\_\_ one), they will be explained in their sub-sections.
+
+## Initialisation
+1. In this part, there are two assertions, this is the starting assertion, they must be true to create the instance :
+
+ * The type of what define the matrix must be a list.
+ * Non-empty matrix, if there are not any row or if the row contain nothing (no columns) the assertion is false,
+ here we calculate the length by finding the max length of all the rows.
+
+2. After we have to add missing case, in fact, this class allow user to create an incomplete matrix like that :  
+$\begin{pmatrix} 1 & 0 &   \\1 & 0 & 1 \\0 &   & \end{pmatrix}\qquad\text{ }$ so we want $\text{ }\qquad\begin{pmatrix}1 & 0 & 0 \\1 & 0 & 1 \\0 & 0 & 0\end{pmatrix}$.  
+In the algorithm, we look for each row, and  we redefine the row as : $\text{row = row + missing 0}$ the number of missing 0 is easily find because it's the matrix length minus the row length.  
+
+
+3. Here, we need to define the main attribute, in this case, there are three attributes :
+
+ * matrix.comp  
+ This is the main attribute, it contain all the matrix's rows and store it as an array of arrays.
+ * matrix.h and matrix.l  
+ These attribute define the height (number of row) and the length (number of columns). 
+ They are not important but I've added them to enhance readability after. 
+
+
+## Representation { #mat-repr}
+This function is important in the class because it define the look of the class when it's called.
+``` Python
+  return "\n".join(["\t".join([str(n) for n in i]) for i in self.comp])
+```
+This f
+    
+# Complex           { #sec-complex}
+
+
+ * representation
+ * addition
+ * substraction
+ * negation
+ * multiplication
+ * transmutation (__invert__)
+ * contain (python "in" function)
+ * setitem (via matrix\[(i,j)]=value)
+ * len ()
+
+# Rational          { #sec-ratio}
