@@ -11,6 +11,7 @@ Matrix implementation with methods :
  * contain (python `in` function)
  * setitem (via `matrix[(i,j)]=value`)
  * len (return a tuple `(i,j)`)
+
 ---
 # Complex
 Class type : Math class  
@@ -24,6 +25,7 @@ Complex implementation with methods :
   * addition
   * multiplication
   * division
+
 ---
 # Rational
 Class type : Math class  
