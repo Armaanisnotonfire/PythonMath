@@ -31,37 +31,75 @@ This class contain 9 methods (and the \_\_init\_\_ one), they will be explained 
  * Non-empty matrix, if there are not any row or if the row contain nothing (no columns) the assertion is false,
  here we calculate the length by finding the max length of all the rows.
 
-2. After we have to add missing case, in fact, this class allow user to create an incomplete matrix like that :  
+2. After we have to fill missing cells, in fact, this class allow user to create an incomplete matrix like that :  
 $\begin{pmatrix} 1 & 0 &   \\1 & 0 & 1 \\0 &   & \end{pmatrix}\qquad\text{ }$ so we want $\text{ }\qquad\begin{pmatrix}1 & 0 & 0 \\1 & 0 & 1 \\0 & 0 & 0\end{pmatrix}$.  
-In the algorithm, we look for each row, and  we redefine the row as : $\text{row = row + missing 0}$ the number of missing 0 is easily find because it's the matrix length minus the row length.  
+In the algorithm, we look for each row, and we redefine the row as : $\text{row = row + missing 0}$ the number of missing 0 is easily find because it's the matrix length minus the row length.  
 
 
-3. Here, we need to define the main attribute, in this case, there are three attributes :
+3. Finally, we need to define the main attribute, this is the main aim of this method, in this case, there are three attributes :
 
  * matrix.comp  
  This is the main attribute, it contain all the matrix's rows and store it as an array of arrays.
  * matrix.h and matrix.l  
- These attribute define the height (number of row) and the length (number of columns). 
- They are not important but I've added them to enhance readability after. 
+ These attribute define the height (number of row) and the length (number of columns).  
+ They are not important but I've added them to enhance readability after. They have been calculated before for the size assertion.
 
 
 ## Representation { #mat-repr}
-This function is important in the class because it define the look of the class when it's called.
+This function is important in the class because it define the look of the class when it's called.  
+We do this in a line with a double join :
 ``` Python
   return "\n".join(["\t".join([str(n) for n in i]) for i in self.comp])
 ```
-This 
-    
+First, we join each cell of each row with a tabulation, after, we join the joined row with new line.
+
+## Sum
+First to made a sum, we need to assert the two matrix have the same size (same height and same length).  
+And now we have to add each cell of the two matrix, we use a two for nested :
+``` Python
+[[self.comp[i][j]+other.comp[i][j] for j in range(self.l)] for i in range(self.h)]
+```
+Finaly, the previous statement return a list of list, we have to recreate a Matrix with it.
+## Scalar product
+
+The scalar product is the easiest method, in fact, we just have to look at each cell and multiply it, so just return :
+``` Python
+Matrix([[scal*self.comp[i][j] for j in range(self.l)] for i in range(self.h)])
+```
+## Negation
+After implement the scalar product, the negation is just calling `self.scal(-1)`.
+
+## Substraction
+Now, we can implement the negation with the sum and the negation, it's `self+(-other)`.
+
+## Transmutation
+The objective of the transmutation is transform row into column.
+
+## Multiplication
+
+## Contain
+This is a magic method that allow to verify if an item is present in a initialized class.
+To do that, we create a empty set and add each row in the set, finaly, we use a `in` that python know, the `item in set()`.
+
+## Set item
+The python magic setitem is normaly working like that :
+``` Python
+variable[key]=value
+```
+but here, to define the value, we need the two coordinates, so we use a tuple, the setitem is used like so :
+``` Python
+variable[(key_I,key_J)]=value
+```
+Pretty easy to implement, just modify `self.comp[key_I][key_J]` and return it.
+
+## Length
+We cant use the magic method because it has to return just an integer but a matrix has two dimension.
+The method return a tuple, of `self.h` and `self.l`.
+
 # Complex           { #sec-complex}
 
 
- * representation
- * addition
- * substraction
- * negation
  * multiplication
- * transmutation (__invert__)
- * contain (python "in" function)
  * setitem (via matrix\[(i,j)]=value)
  * len ()
 

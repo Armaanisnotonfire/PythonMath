@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+  <meta name="generator" content="Madoko, version 0.9.23-beta" />
+  <meta name="viewport" content="initial-scale=1.0" />
+  <meta name="author" content="Enzo Mallard" />
+  <title>Mathematics class</title>
+  <style type="text/css"  class="link">
+  /*# sourceURL=madoko.css */
+  /* ---------------------------------------------------
+     Various settings to display madoko elements correctly.
+     For example, lines in tables or a table of contents.
+  
+     All rules use specific madoko classes and never just
+     a generic element. This means one can safely include
+     this CSS into any web page without affecting non-madoko
+     content.
+  ----------------------------------------------------*/
+  
+  /* The table of  contents */
+  .madoko .toc>.tocblock .tocblock .tocblock {
+    margin-left: 2.25em;
+  }
+  
+  .madoko .toc>.tocblock .tocblock {
+    margin-left: 1.5em;
+  }
+  
+  .madoko .toc>.tocblock>.tocitem {
+    font-weight: bold;
+  }
+  
+  .madoko .toc {
+    margin-top: 1em;
+  }
+  
+  /* Paragraphs */
+  .madoko p.para-continue {
+    margin-bottom: 0pt;
+  }
+  
+  .madoko .para-block+p {
+    margin-top: 0pt;
+  }
+  
+  .madoko ul.para-block, .madoko ol.para-block {
+    margin-top: 0pt;
+    margin-bottom: 0pt;
+  }
+  
+  .madoko ul.para-end, .madoko ol.para-end {
+    margin-bottom: 1em;
+  }
+  
+  .madoko dl {
+    margin-left: 0em;
+  }
+  
+  .madoko blockquote {
+    font-style: italic;
+  }
+  
+  /* Local page links do not get an underline unless hovering */
+  .madoko a.localref {
+    text-decoration: none;
+  }
+  .madoko a.localref:hover {
+    text-decoration: underline;
+  }
+  
+  /* Footnotes */
+  .madoko .footnotes {
+    font-size: smaller;
+    margin-top: 2em;
+  }
+  
+  .madoko .footnotes hr {
+    width: 50%;
+    text-align: left;
+  }
+  
+  .madoko .footnote { 
+    margin-left: 1em;
+  }
+  .madoko .footnote-before {
+    margin-left: -1em;
+    width: 1em;
+    display: inline-block;
+  }
+  
+  /* Alignment */
+  .madoko .align-center, .madoko .align-center>p {
+    text-align: center !important;
+  }
+  
+  .madoko .align-center pre {
+    text-align: left;
+  }
+  
+  .madoko .align-center>* {
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+  
+  .madoko .align-left, .madoko .align-left>p {
+    text-align: left !important;
+  }
+  
+  .madoko .align-left>* {
+    margin-left: 0pt !important;
+    margin-right: auto !important;
+  }
+  
+  .madoko .align-right, .madoko .align-right>p {
+    text-align: right !important;
+  }
+  
+  .madoko .align-right>* {
+    margin-left: auto !important;
+    margin-right: 0pt !important;
+  }
+  
+  .madoko .align-center>table,
+  .madoko .align-left>table,
+  .madoko .align-right>table {
+    text-align: left !important;
+  }
+  
+  
+  /* Equations, Figure's etc. */
+  .madoko .equation-before {
+    float: right;
+  }
+  
+  /* Bibliography */
+  .madoko .bibitem {
+    font-size: smaller;
+  }
+  
+  .madoko .bib-numeric .bibitem {
+    margin-left: 3em;
+    text-indent: -3em;
+  }
+  
+  .madoko .bibitem-before {
+    display: none;
+  }
+  
+  .madoko .bib-numeric .bibitem-before {
+    display: inline-block;
+    width: 3em;
+    text-align: right;
+  }
+  
+  .madoko .bibsearch {
+    font-size: x-small;
+    text-decoration:none;
+    color: black;
+    font-family: "Segoe UI Symbol", Symbola, serif;
+  }
+  
+  /* General */
+  .madoko .block, .madoko .figure, .madoko .bibitem, .madoko .equation, .madoko div.math {
+    margin-top: 1ex;
+    margin-bottom: 1ex;
+  }
+  
+  .madoko .figure {
+    padding: 0.5em;
+    margin-left: 0pt;
+    margin-right: 0pt;
+  }
+  
+  .madoko .hidden {
+    display: none;
+  }
+  
+  .madoko .invisible {
+    visibility: hidden;
+  }
+  
+  .madoko.preview .invisible {
+    visibility: visible;
+    opacity: 0.5;
+  }
+  
+  .madoko code.code, .madoko span.code {
+    white-space: pre-wrap;
+  }
+  
+  .madoko hr, hr.madoko {
+    border: none;
+    border-bottom: black solid 1px;
+    margin-bottom: 0.5ex;
+  }
+  
+  .madoko .framed>*:first-child {
+    margin-top: 0pt;
+  }
+  .madoko .framed>*:last-child {
+    margin-bottom: 0pt;
+  }
+  
+  /* Lists */
+  
+  .madoko ul.list-star {
+    list-style-type: disc;
+  }
+  
+  .madoko ul.list-dash {
+      list-style-type: none !important;
+  }
+  
+  .madoko ul.list-dash > li:before {
+      content: "\2013"; 
+      position: absolute;
+      margin-left: -1em; 
+  }
+  
+  .madoko ul.list-plus {
+    list-style-type: square;
+  }
+  
+  /* Tables */
+  .madoko table.madoko {
+    border-collapse: collapse;
+  }
+  .madoko td, .madoko th {
+    padding: 0ex 0.5ex;
+    margin: 0pt;
+    vertical-align: top;
+  }
+  
+  .madoko .cell-border-left {
+    border-left: 1px solid black;
+  }
+  .madoko .cell-border-right {
+    border-right: 1px solid black;
+  }
+  
+  
+  .madoko thead>tr:first-child>.cell-line,
+  .madoko tbody:first-child>tr:first-child>.cell-line {
+    border-top: 1px solid black;
+    border-bottom: none;
+  }
+  
+  .madoko .cell-line, .madoko .cell-double-line {
+    border-bottom: 1px solid black;
+    border-top: none;
+  }
+  
+  .madoko .cell-double-line {
+    border-top: 1px solid black;
+    padding-top: 1.5px !important;
+  }
+  
+  
+  /* Math Pre */
+  .madoko .input-mathpre .MathJax_Display {
+    text-align: left !important;
+  }
+  
+  .madoko div.input-mathpre {
+    text-align: left;
+    margin-top: 1.5ex;
+    margin-bottom: 1ex;
+  }
+  
+  .madoko .math-rendering {
+    color: gray;
+  }
+  
+  /* Math */
+  .madoko .mathdisplay {
+    text-align: center;
+  }
+  
+  
+  /*---------------------------------------------------------------------------
+    Default style for syntax highlighting
+  ---------------------------------------------------------------------------*/
+  
+  .madoko .pretty table {
+    border-collapse: collapse;
+  }
+  .madoko .pretty td {
+    padding: 0em;
+  }
+  .madoko .pretty td.empty {
+    min-width: 1.5ex;
+  }
+  .madoko .pretty td.expander {
+    width: 100em;
+  }
+  
+  /* ---------------------------------------------------
+     Styling for full documents
+  ----------------------------------------------------*/
+  body.madoko, .madoko .serif {
+    font-family: Cambria,"Times New Roman","Liberation Serif","Times",serif;
+  }
+  .madoko .sans-serif {
+    font-family: "Calibri", "Optima", sans-serif;
+  }
+  .madoko .symbol {
+    font-family: "Segoe UI Symbol", Symbola, serif;
+  }
+  
+  
+  body.madoko {  
+    -webkit-text-size-adjust: 100%;       /* so math displays well on mobile devices */
+    text-rendering: optimizeLegibility;
+  }
+  
+  body.madoko {
+    max-width: 88ex; /* about 88 characters */
+    margin: 1em auto;
+    padding: 0em 2em;  
+  }
+  
+  body.preview.madoko {
+    padding: 0em 1em;
+  }
+  
+  .madoko p,
+  .madoko li {
+    text-align: justify;
+  }
+  
+  /* style headings nicer, especially h5 and h6 */
+  .madoko h1, .madoko h2, .madoko h3, .madoko h4 { 
+    margin-top: 1.22em; 
+    margin-bottom: 1ex;
+  }
+  .madoko h1+p, .madoko h2+p, .madoko h3+p, .madoko h4+p, .madoko h5+p  { 
+    margin-top: 1ex;    
+  }
+  .madoko h5, .madoko h6 { 
+    margin-top: 1ex;
+    font-size: 1em;
+  }
+  .madoko h5 { 
+    margin-bottom: 0.5ex;
+  }
+  .madoko h5 + p {
+    margin-top: 0.5ex;
+  }
+  .madoko h6 { 
+    margin-bottom: 0pt;
+  }
+  .madoko h6 + p {
+    margin-top: 0pt;
+  }
+  
+  
+  /* Fix monospace display (see http://code.stephenmorley.org/html-and-css/fixing-browsers-broken-monospace-font-handling/) */
+  .madoko pre, .madoko code, .madoko kbd, .madoko samp, .madoko tt, 
+  .madoko .monospace, .madoko .token-indent, .madoko .reveal pre, .madoko .reveal code, .madoko .email {
+    font-family: Consolas,"Andale Mono WT","Andale Mono",Lucida Console,Monaco,monospace,monospace;
+    font-size: 0.85em;
+  }
+  .madoko pre code, .madoko .token-indent {
+    font-size: 0.95em;
+  }
+  
+  .madoko pre code {
+    font-family: inherit !important;
+  }
+  
+  /* Code prettify */
+  .madoko ol.linenums li {
+    background-color: white;
+    list-style-type: decimal;
+  }
+  
+  /* Merging */
+  .madoko .remote {
+    background-color: #F0FFF0;
+  }
+  .madoko .remote + * {
+    margin-top: 0pt;
+  }
+  
+  /* ---------------------------------------------------
+     Print settings
+  ----------------------------------------------------*/
+  
+  @media print {
+    body.madoko {
+      font-size: 10pt;
+    }
+    @page {
+      margin: 1in 1.5in;
+    }
+  }
+  
+  /* ---------------------------------------------------
+     Mobile device settings
+  ----------------------------------------------------*/
+  
+  @media only screen and (max-device-width:1024px) {
+    body.madoko {
+      padding: 0em 0.5em;    
+    }
+    .madoko li {
+      text-align: left;
+    }
+  }
+  
+    </style>
+  
+  </head>
+<body class="madoko">
+
+<div class="body madoko" style="line-adjust:0">
+
+<div class="titleblock align-center para-block" data-line="16" style="text-align:center;line-adjust:0">
+<div class="titleheader align-center" data-line="16" style="text-align:center;line-adjust:0">
+<div class="title para-block" data-line="16" style="font-size:xx-large;font-weight:bold;margin-bottom:0.5ex;line-adjust:0"><span data-line="16"></span>Mathematics class</div>
+<div class="subtitle para-block" data-line="19" style="font-size:x-large;margin-bottom:0.5ex;line-adjust:0"><span data-line="19"></span>Written in python</div></div>
+<div class="authors align-center" data-line="24" style="text-align:center;width:80%;line-adjust:0"><table class="authorrow columns block" data-line="24" style="margin-top:2ex;width:100%;line-adjust:0">
+<tbody><tr><td class="author column" data-line="24" style="text-align:center;line-adjust:0">
+<div class="authorname" data-line="24" style="font-size:large;line-adjust:0"><span data-line="24"></span>Enzo Mallard</div>
+<div class="authoraddress" data-line="27" style="line-adjust:0"><span data-line="27"></span>IUT-Nantes INFO 1 G4-2</div>
+<div class="authoremail email" data-line="30" style="line-adjust:0"><span data-line="30"></span>enzo.mallard@etu.univ-nantes.fr</div></td></tr></tbody></table></div></div>
+<div class="abstract" data-line="18" style="margin-left:3em;margin-right:3em;font-size:small">
+<p class="p noindent" data-line="19"><span data-line="19"></span><strong class="strong-star2">Abstract.</strong><span data-line="19"></span> The aim of this library is to implement several mathematics aspects.
+Currently, there are only the<span data-line="20"></span>&nbsp;<a href="#sec-matrix" class="localref">Matrix</a><span data-line="20"></span> class, the<span data-line="20"></span>&nbsp;<a href="#sec-complex" class="localref">Complex</a><span data-line="20"></span> class and the<span data-line="20"></span>&nbsp;<a href="#sec-ratio" class="localref">Ratio</a><span data-line="20"></span>.</p></div><h2 id="sec-matrix" class="h1" data-line="24" data-heading-depth="1" style="display:block"><span data-line="24"></span><span class="heading-before"><span class="heading-label">1</span>.&#8194;</span><span data-line="24"></span>Matrix</h2>
+<p class="p noindent" data-line="25"><span data-line="25"></span>This class contain 9 methods (and the <span data-line="25"></span>_<span data-line="25"></span>_<span data-line="25"></span>init<span data-line="25"></span>_<span data-line="25"></span>_<span data-line="25"></span> one), they will be explained in their sub-sections.
+</p><h3 id="sec-initialisation" class="h2" data-line="27" data-heading-depth="2" style="display:block"><span data-line="27"></span><span class="heading-before"><span class="heading-label">1.1</span>.&#8194;</span><span data-line="27"></span>Initialisation</h3>
+<ol class="ol loose" data-line="28">
+<li class="li ol-li loose-li" data-line="28">
+<p data-line="28"><span data-line="28"></span>In this part, there are two assertions, this is the starting assertion, they must be true to create the instance :
+</p>
+<ul class="ul list-star compact" data-line="30">
+<li class="li ul-li list-star-li compact-li" data-line="30"><span data-line="30"></span>The type of what define the matrix must be a list.
+</li>
+<li class="li ul-li list-star-li compact-li" data-line="31"><span data-line="31"></span>Non-empty matrix, if there are not any row or if the row contain nothing (no columns) the assertion is false,
+here we calculate the length by finding the max length of all the rows.
+</li></ul>
+</li>
+<li class="li ol-li loose-li" data-line="34">
+<p data-line="34"><span data-line="34"></span>After we have to add missing case, in fact, this class allow user to create an incomplete matrix like that :<span data-line="34"></span><br>
+<span data-line="35"></span><span class="math-rendering" title="Rendering math..."><span class="math-inline">$\begin{pmatrix} 1 &amp; 0 &amp;   \\1 &amp; 0 &amp; 1 \\0 &amp;   &amp; \end{pmatrix}\qquad\text{ }$</span></span><span data-line="35"></span> so we want <span data-line="35"></span><span class="math-rendering" title="Rendering math..."><span class="math-inline">$\text{ }\qquad\begin{pmatrix}1 &amp; 0 &amp; 0 \\1 &amp; 0 &amp; 1 \\0 &amp; 0 &amp; 0\end{pmatrix}$</span></span><span data-line="35"></span>.<span data-line="35"></span><br>
+<span data-line="36"></span>In the algorithm, we look for each row, and  we redefine the row as : <span data-line="36"></span><span class="math-rendering" title="Rendering math..."><span class="math-inline">$\text{row = row + missing 0}$</span></span><span data-line="36"></span> the number of missing 0 is easily find because it<span data-line="36"></span>&#39;<span data-line="36"></span>s the matrix length minus the row length.<span data-line="36"></span> <span data-line="36"></span> 
+</p></li></ol>
+
+<ol class="ol loose" start="3" data-line="39">
+<li class="li ol-li loose-li" data-line="39">
+<p data-line="39"><span data-line="39"></span>Here, we need to define the main attribute, in this case, there are three attributes :
+</p>
+<ul class="ul list-star compact" data-line="41">
+<li class="li ul-li list-star-li compact-li" data-line="41"><span data-line="41"></span>matrix.comp<span data-line="41"></span><br>
+<span data-line="42"></span>This is the main attribute, it contain all the matrix<span data-line="42"></span>&#39;<span data-line="42"></span>s rows and store it as an array of arrays.
+</li>
+<li class="li ul-li list-star-li compact-li" data-line="43"><span data-line="43"></span>matrix.h and matrix.l<span data-line="43"></span><br>
+<span data-line="44"></span>These attribute define the height (number of row) and the length (number of columns). 
+They are not important but I<span data-line="45"></span>&#39;<span data-line="45"></span>ve added them to enhance readability after. 
+</li></ul>
+</li></ol>
+<h3 id="mat-repr" class="h2" data-line="48" data-heading-depth="2" style="display:block"><span data-line="48"></span><span class="heading-before"><span class="heading-label">1.2</span>.&#8194;</span><span data-line="48"></span>Representation</h3>
+<p class="p noindent" data-line="49"><span data-line="49"></span>This function is important in the class because it define the look of the class when it<span data-line="49"></span>&#39;<span data-line="49"></span>s called.
+</p>
+<pre class="para-block pre-fenced pre-fenced3 language-python lang-python python colorized" data-line="50" data-line-first="51" style="display:block"><code data-line="51">  <span style="color:blue">return</span> <span style="color:maroon">&quot;</span><span style="color:gray">\n</span><span style="color:maroon">&quot;</span>.join([<span style="color:maroon">&quot;</span><span style="color:gray">\t</span><span style="color:maroon">&quot;</span>.join([str(n) <span style="color:blue">for</span> n <span style="color:blue">in</span> i]) <span style="color:blue">for</span> i <span style="color:blue">in</span> self.comp])</code></pre>
+<p class="p noindent para-continued" data-line="53"><span data-line="53"></span>This 
+  <span data-line="54"></span> <span data-line="54"></span> 
+</p><h2 id="sec-complex" class="h1" data-line="55" data-heading-depth="1" style="display:block"><span data-line="55"></span><span class="heading-before"><span class="heading-label">2</span>.&#8194;</span><span data-line="55"></span>Complex</h2>
+<ul class="ul list-star compact" data-line="58">
+<li class="li ul-li list-star-li compact-li" data-line="58"><span data-line="58"></span>representation
+</li>
+<li class="li ul-li list-star-li compact-li" data-line="59"><span data-line="59"></span>addition
+</li>
+<li class="li ul-li list-star-li compact-li" data-line="60"><span data-line="60"></span>substraction
+</li>
+<li class="li ul-li list-star-li compact-li" data-line="61"><span data-line="61"></span>negation
+</li>
+<li class="li ul-li list-star-li compact-li" data-line="62"><span data-line="62"></span>multiplication
+</li>
+<li class="li ul-li list-star-li compact-li" data-line="63"><span data-line="63"></span>transmutation (<span data-line="63"></span><strong class="strong-low2">invert</strong><span data-line="63"></span>)
+</li>
+<li class="li ul-li list-star-li compact-li" data-line="64"><span data-line="64"></span>contain (python <span data-line="64"></span>&#8220;in&#8221;<span data-line="64"></span> function)
+</li>
+<li class="li ul-li list-star-li compact-li" data-line="65"><span data-line="65"></span>setitem (via matrix<span data-line="65"></span>[<span data-line="65"></span>(i,j)]=value)
+</li>
+<li class="li ul-li list-star-li compact-li" data-line="66"><span data-line="66"></span>len ()
+</li></ul>
+<h2 id="sec-ratio" class="h1" data-line="68" data-heading-depth="1" style="display:block"><span data-line="68"></span><span class="heading-before"><span class="heading-label">3</span>.&#8194;</span><span data-line="68"></span>Rational</h2>
+<div class="logomadoko" data-line="71" style="display:block;text-align:right;font-size:xx-small;margin-top:4em"><span data-line="72"></span>Created with&nbsp;<a href="https://www.madoko.net">Madoko.net</a>.</div><span data-line=""></span></div>
+</body>
+
+</html>

@@ -18,10 +18,10 @@ class Matrix():
         * transmutation (__invert__)
         * contain (python "in" funtion)
         * setitem (via matrix[(i,j)]=value)
-        * len ()
+        * len (return a tuple (i,j))
     '''
     def __init__(self, component):
-        assert type(component) is list, str(type(component))+" n'est pas suporté par <class 'Matrix'>, n'est pas de type <class 'list'>"
+        assert type(component) is list, str(type(component))+" type isn't supported by <class 'Matrix'>, must be <class 'list'>"
 
         h = len(component)
         assert h>0, "Empty matrix"
