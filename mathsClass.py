@@ -1,8 +1,9 @@
+# coding=utf8
 ''' Display the doc of all the defined classes
 for i in [("\n".join(c)) for c in [[i for i in p.__doc__.split("\n")] for p in defined_class]]: print(i.encode('utf-8').decode('unicode-escape'))
 '''
 
-defined_class = [Matrix, Complex, Ratio] # Completed/functional classes
+###defined_class = [Matrix, Complex, Ratio] # Completed/functional classes
 """ MATRIX CLASS"""
 class Matrix():
     '''
@@ -74,7 +75,8 @@ class Matrix():
         for i in self.comp:  # Create a set with one occurence of each item in the matrix
             checklist = checklist | set(i)
         return (item in checklist) #Check item is in the set (python know this)
-
+    def get(self, key):
+        return self.comp[key[0],key[1]
     def __setitem__(self, key, value): #use to redifine a value
         assert type(key) is tuple and len(key)==2, "The key is badly set please use mat[(i,j)]"
         self.comp[key[0]][key[1]] = value
@@ -86,6 +88,10 @@ class Matrix():
 
     def scal(self, scal):
         return Matrix([[scal*self.comp[i][j] for j in range(self.l)] for i in range(self.h)])
+
+def funcMatrix(dim, func):
+    return Matrix([[func(i,j) for i in range(dim[0])] for j in range(dim[1])])
+
 ## Actually there are too many assertions here ! (do not see that py in Pyzo, it's ugly)
 
 """ COMPLEX CLASS """
