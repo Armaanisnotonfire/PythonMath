@@ -3,7 +3,6 @@
 for i in [("\n".join(c)) for c in [[i for i in p.__doc__.split("\n")] for p in defined_class]]: print(i.encode('utf-8').decode('unicode-escape'))
 '''
 
-###defined_class = [Matrix, Complex, Ratio] # Completed/functional classes
 """ MATRIX CLASS"""
 class Matrix():
     '''
@@ -16,7 +15,7 @@ class Matrix():
         * substraction
         * negation
         * multiplication
-        * transmutation (__invert__)
+        * transpose (__invert__)
         * contain (python "in" funtion)
         * setitem (via matrix[(i,j)]=value)
         * len (return a tuple (i,j))
@@ -36,10 +35,22 @@ class Matrix():
         self.comp = component # Correctly shaped matrix (fill w missing 0)
         self.l = l # Usefull because its often called in the Matrix class
         self.h = h # Same
-
+        
+    def __hash__(self):
+        h=0
+        for i in range(self.h):
+            for j in range(self.l):
+                h=h^hash(self.comp[i][j])
+        return h
+    
     def __repr__(self):
         return "\n".join(["\t".join([str(n) for n in i]) for i in self.comp])
+    ## Other methods
+    def len(self):
+        return (self.h,self.l)
 
+    def scal(self, scal):
+        return Matrix([[scal*self.comp[i][j] for j in range(self.l)] for i in range(self.h)])
     ## magic methods
     #  Main magic methods
     def __add__(self, other):
@@ -53,17 +64,20 @@ class Matrix():
         return self.scal(-1)
 
     def __mul__(self, other):
-        assert self.l==other.h and self.h==other.l, "Size error"
-        return Matrix([[sum([self.comp[rowN][i]*other.comp[i][colN] for i in range(self.l)]) for colN in range(other.l)] for rowN in range(self.h)])
-        '''
-        The line above is a little bit too long so i split it here just for reader
-
-        for rowN in range(self.h):
-            for colN in range(other.l): #Change the name just for readability (cuz it's same as self.h)
-                for i in range(self.l)  #or range(other.h)
-                    self.comp[rowN][i]*other.comp[i][colN]
-        '''
-
+        if type(other)==type(self) and type(self)==Matrix:
+            assert self.l==other.h, "Size error"
+            return Matrix([[sum([self.comp[rowN][i]*other.comp[i][colN] for i in range(self.l)]) for colN in range(other.l)] for rowN in range(self.h)])
+            '''
+            The line above is a little bit too long so i split it here just for reader
+    
+            for rowN in range(self.h):
+                for colN in range(other.l): #Change the name just for readability (cuz it's same as self.h)
+                    for i in range(self.l)  #or range(other.h)
+                        self.comp[rowN][i]*other.comp[i][colN]
+            '''
+        else:
+            assert type(a)==Matrix and type(other)==type(0), 'nop, on fait Matrix()*n'
+            return Matrix.scal(self,other)
     def __invert__(self):
         return Matrix([[self.comp[j][i] for j in range(self.h)] for i in range(self.l)])
 
@@ -75,24 +89,33 @@ class Matrix():
         for i in self.comp:  # Create a set with one occurence of each item in the matrix
             checklist = checklist | set(i)
         return (item in checklist) #Check item is in the set (python know this)
-    def get(self, key):
-        return self.comp[key[0],key[1]
-    def __setitem__(self, key, value): #use to redifine a value
+    def __iter__(self):
+        for j in range(self.h):
+            for i in range(self.l):
+                yield self.comp(i,j)
+        
+    def __getitem__(self, key):
+        return self.comp[key[0]][key[1]]
+
+    def __setitem__(self, key, value): #use to redefine a value
         assert type(key) is tuple and len(key)==2, "The key is badly set please use mat[(i,j)]"
         self.comp[key[0]][key[1]] = value
         return self
     set = __setitem__
-    ## Other methods
-    def len(self):
-        return (self.h,self.l)
+    
+    def __eq__(self,other):
+        return hash(a)==hash(b)
 
-    def scal(self, scal):
-        return Matrix([[scal*self.comp[i][j] for j in range(self.l)] for i in range(self.h)])
-
+def MatNul(dim):
+    return funcMatrix(dim, lambda i,j : 0)
+    
+def MatId(n):
+    
+    return Matrix([[1 if j==i else 0 for j in range(n)] for i in range(n)])
+    
 def funcMatrix(dim, func):
-    return Matrix([[func(i,j) for i in range(dim[0])] for j in range(dim[1])])
+    return Matrix([[func(i,j) for j in range(dim[1])] for i in range(dim[0])])
 
-## Actually there are too many assertions here ! (do not see that py in Pyzo, it's ugly)
 
 """ COMPLEX CLASS """
 class Complex():
@@ -193,3 +216,5 @@ class Ratio():
 
     def __truediv__(self, other):
         return self * other.inv()
+
+defined_class = [Matrix, Complex, Ratio] # Completed/functional classes
