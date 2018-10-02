@@ -3,6 +3,7 @@
 for i in [("\n".join(c)) for c in [[i for i in p.__doc__.split("\n")] for p in defined_class]]: print(i.encode('utf-8').decode('unicode-escape'))
 '''
 
+
 """ MATRIX CLASS"""
 class Matrix():
     '''
@@ -117,6 +118,7 @@ def funcMatrix(dim, func):
     return Matrix([[func(i,j) for j in range(dim[1])] for i in range(dim[0])])
 
 
+
 """ COMPLEX CLASS """
 class Complex():
     '''
@@ -164,6 +166,7 @@ class Complex():
     def __truediv__(self, other):
         return Complex((-other*self).real()/(-other*other).real(),(-other*self).imag()/(-other*other).real())
 
+    
 """ RATIONAL CLASS"""
 class Ratio():
     '''
